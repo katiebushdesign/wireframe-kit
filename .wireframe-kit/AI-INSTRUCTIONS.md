@@ -91,7 +91,9 @@ Pages touched, section→block map, notes applied/flagged, scripts run.
 2. Replace `{{placeholders}}`; expand `<!-- repeat -->` sections per list length.
 3. See [block-mapping.md](./block-mapping.md). CSS: `css/style.css` at repo root.
 
-Shell: nav → breadcrumb → sections → `cta-band` → footer. Use `../` one level down from root.
+Shell: nav (see [blocks/nav-shell.html](./blocks/nav-shell.html)) → breadcrumb → sections → `cta-band` → footer. Use `../` one level down from root. Include `js/nav.js` on every page.
+
+**Responsive:** Use `css/style.css` grid/section classes only; they stack at breakpoints. No `min-width` on `body`. Mobile nav: `.nav-links--desktop`, `#nav-mobile`, `.nav-toggle` + `js/nav.js`.
 
 **Do not** invent new section DOM; add a block file + registry entry if a layout is missing.
 

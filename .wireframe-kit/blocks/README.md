@@ -29,6 +29,10 @@ Agents must **resolve** template tokens before writing HTML:
 
 Never leave `{{…}}` or `<!-- repeat -->` comments in client-facing HTML.
 
+## Site chrome (not in registry)
+
+[`nav-shell.html`](nav-shell.html) — sticky header, mobile menu, mega menu backdrop. Not copy-doc driven.
+
 ## Registry
 
 [`registry.json`](registry.json) — block `id`, fields, copy-doc label hints.
