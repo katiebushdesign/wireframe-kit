@@ -1,19 +1,19 @@
-# Generated content (not client-specific in git)
+# Copy pipeline output
 
-This folder holds **parser output** from `make parse-copy`. It should be empty in the starter template except `.gitkeep` files.
+This folder holds **parser output** from `make parse-copy`.
 
-| Path | Git |
-|------|-----|
-| `source/*.docx` | Ignored — export from Google Doc here |
-| `pages/*.json` | Ignored — generated per client |
-| `nav/*.json` | Ignored — generated mega menus |
+## Starter template (wireframe-kit repo)
 
-After cloning the starter, run `make parse-copy` once you have a copy doc. Do not commit 212 (or other client) JSON into `wireframe-kit-starter`.
+Keep `pages/` and `nav/` empty except `.gitkeep` — no client copy in the kit repo.
 
-To clear leftover local files:
+## Client wireframe repos (e.g. `leotech-wireframes`)
 
-```bash
-rm -f .wireframe-kit/content/pages/*.json \
-      .wireframe-kit/content/nav/*.json \
-      .wireframe-kit/content/source/*.docx
-```
+**Commit** `pages/*.json` and `nav/*.json` after `make parse-copy` so collaborators get the same structured copy without re-exporting the Google Doc.
+
+| Path | Git in client repos |
+|------|---------------------|
+| `source/*.docx` | Ignored — export from Google Doc locally when refreshing copy |
+| `pages/*.json` | **Tracked** — one JSON file per copy-doc page table |
+| `nav/*.json` | **Tracked** — mega menu tables from the doc (if any) |
+
+Workflow when copy changes: export `.docx` to `source/` → `make parse-copy` → commit JSON → update HTML → push.

@@ -34,7 +34,7 @@ Copy: **Google Doc** (one table per page). Layout: HTML + optional `.wireframe-k
 
 **Config:** `.wireframe-kit/config/client.yaml`, `.wireframe-kit/config/site-map.yaml`
 
-**Do not commit** unless the user explicitly asks.
+**Git:** Client wireframe repos track repo-root HTML and `.wireframe-kit/content/pages/` + `nav/` JSON after `make parse-copy`. Keep `source/*.docx` local (gitignored). Agents: do not commit unless the user asks — when they ask to push/publish, include content JSON if copy was ingested.
 
 ---
 

@@ -1,5 +1,6 @@
 .DS_Store
 
+# Copy doc export (large binary; re-export from Google Doc when copy changes)
 .wireframe-kit/content/source/*.docx
 .wireframe-kit/content/source/*.doc
 
@@ -7,7 +8,4 @@
 .claude/skills
 .agents/skills
 
-# Generated copy JSON (optional — comment out to track in git)
-.wireframe-kit/content/pages/*.json
-.wireframe-kit/content/nav/*.json
 .wireframe-kit/.preview-server.pid

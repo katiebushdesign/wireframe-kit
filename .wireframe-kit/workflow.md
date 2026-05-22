@@ -43,6 +43,7 @@ Load skill **`create-wireframe`** — intake questions, then Phases 1–4 in ord
 2. Save to `.wireframe-kit/content/source/copy.docx` (gitignored if large).
 3. Run from repo root: `make parse-copy`
 4. Output: `.wireframe-kit/content/pages/<slug>.json` + `.wireframe-kit/content/nav/mega-menus.json`.
+5. **Client repos:** commit `pages/` and `nav/` JSON (see [content/README.md](./content/README.md)) so clones do not need the docx to work.
 
 ## Phase 4 — Build / update HTML (agent)
 

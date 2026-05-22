@@ -140,7 +140,7 @@ Report to the user:
 - Copy doc / site-map gaps or notes you could not auto-apply
 - GitHub repo URL and Pages preview (`preview_base_url` + paths)
 - Whether initial push / Pages setup ran
-- Reminder: export doc as **.docx** when copy changes; re-run `make parse-copy`
+- Reminder: export doc as **.docx** when copy changes; re-run `make parse-copy`; commit `content/pages/` and `content/nav/` JSON in client repos
 
 ---
 
