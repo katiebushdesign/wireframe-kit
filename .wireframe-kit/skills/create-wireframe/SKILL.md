@@ -107,7 +107,7 @@ Follow **AI-INSTRUCTIONS.md** tasks:
 
 | Mode | Action |
 |------|--------|
-| **Greenfield** | For each page in `site-map.yaml`: shell (nav → breadcrumb → sections → `cta-band` → footer), fill from `blocks/*.html` + parsed JSON |
+| **Greenfield** | For each page in `site-map.yaml`: shell ([`nav-shell.html`](../blocks/nav-shell.html) + `js/nav.js` → breadcrumb → sections → `cta-band` → footer), fill from `blocks/*.html` + parsed JSON |
 | **Revision** | Patch existing repo-root HTML; same block mapping |
 
 Rules:
