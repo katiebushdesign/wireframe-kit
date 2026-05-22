@@ -37,10 +37,12 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
-html.nav-mobile-open,
+html.nav-mobile-open {
+  overflow: hidden;
+}
 body.nav-mobile-open {
   overflow: hidden;
-  height: 100%;
+  width: 100%;
 }
 
 /* ── NAVBAR ── */
