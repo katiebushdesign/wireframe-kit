@@ -9,28 +9,9 @@
   var root = document.documentElement;
   var body = document.body;
   var desktopMq = window.matchMedia('(min-width: 1024px)');
-  var scrollY = 0;
-
   function setScrollLock(on) {
     root.classList.toggle('nav-mobile-open', on);
     body.classList.toggle('nav-mobile-open', on);
-    if (desktopMq.matches) {
-      body.style.position = '';
-      body.style.top = '';
-      body.style.width = '';
-      return;
-    }
-    if (on) {
-      scrollY = window.scrollY;
-      body.style.position = 'fixed';
-      body.style.top = '-' + scrollY + 'px';
-      body.style.width = '100%';
-    } else {
-      body.style.position = '';
-      body.style.top = '';
-      body.style.width = '';
-      window.scrollTo(0, scrollY);
-    }
   }
 
   function setMobileBackdrop(on) {

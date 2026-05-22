@@ -37,12 +37,10 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
-html.nav-mobile-open {
-  overflow: hidden;
-}
+html.nav-mobile-open,
 body.nav-mobile-open {
   overflow: hidden;
-  width: 100%;
+  overscroll-behavior: none;
 }
 
 /* ── NAVBAR ── */
@@ -1358,8 +1356,15 @@ html.page-verticals .vertical-section {
   .mega-backdrop:not(.open) { display: none !important; }
 
   .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     padding: 0 20px;
     z-index: 101;
+  }
+  body {
+    padding-top: var(--nav-height);
   }
   .nav-mobile.open {
     display: block;
