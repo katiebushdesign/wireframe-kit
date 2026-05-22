@@ -6,11 +6,21 @@
   var megaButtons = document.querySelectorAll('[data-mega]');
   var toggle = document.querySelector('.nav-toggle');
   var mobile = document.getElementById('nav-mobile');
-  var body = document.body;
+  var root = document.documentElement;
   var desktopMq = window.matchMedia('(min-width: 1024px)');
 
+  function setScrollLock(on) {
+    root.classList.toggle('nav-mobile-open', on);
+    document.body.classList.toggle('nav-mobile-open', on);
+  }
+
+  function setMobileBackdrop(on) {
+    if (!backdrop || desktopMq.matches) return;
+    backdrop.classList.toggle('open', on);
+  }
+
   function closeMega() {
-    if (backdrop) backdrop.classList.remove('open');
+    if (backdrop && desktopMq.matches) backdrop.classList.remove('open');
     panels.forEach(function (p) {
       p.classList.remove('open');
     });
@@ -24,7 +34,8 @@
     mobile.classList.remove('open');
     toggle.setAttribute('aria-expanded', 'false');
     toggle.setAttribute('aria-label', 'Open menu');
-    body.classList.remove('nav-mobile-open');
+    setScrollLock(false);
+    setMobileBackdrop(false);
   }
 
   function closeAll() {
@@ -57,7 +68,8 @@
       var open = mobile.classList.toggle('open');
       toggle.setAttribute('aria-expanded', open ? 'true' : 'false');
       toggle.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
-      body.classList.toggle('nav-mobile-open', open);
+      setScrollLock(open);
+      setMobileBackdrop(open);
       if (open) closeMega();
     });
     mobile.querySelectorAll('a').forEach(function (link) {

@@ -26,6 +26,7 @@
   --nav-logo-image: url('../assets/logo.svg');
   --nav-logo-aspect-w: 120;
   --nav-logo-aspect-h: 32;
+  --nav-height: 60px;
 }
 
 body {
@@ -36,7 +37,11 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
 }
-body.nav-mobile-open { overflow: hidden; }
+html.nav-mobile-open,
+body.nav-mobile-open {
+  overflow: hidden;
+  height: 100%;
+}
 
 /* ── NAVBAR ── */
 .navbar {
@@ -1347,9 +1352,25 @@ html.page-verticals .vertical-section {
   .nav-cta--desktop { display: none; }
   .nav-toggle { display: inline-flex; }
   .mega-panel { display: none !important; }
-  .mega-backdrop { display: none !important; }
+  /* Backdrop still used to dim page and close mobile menu */
+  .mega-backdrop:not(.open) { display: none !important; }
 
-  .navbar { padding: 0 20px; }
+  .navbar {
+    padding: 0 20px;
+    z-index: 101;
+  }
+  .nav-mobile.open {
+    display: block;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: var(--nav-height);
+    bottom: 0;
+    z-index: 100;
+    overflow-y: auto;
+    overscroll-behavior: contain;
+    -webkit-overflow-scrolling: touch;
+  }
   .nav-mobile-inner { padding-left: 20px; padding-right: 20px; }
   .pad-xl { padding: 56px 20px; }
   .pad-lg { padding: 48px 20px; }
@@ -1420,6 +1441,7 @@ html.page-verticals .vertical-section {
 }
 
 @media (max-width: 639px) {
+  :root { --nav-height: 56px; }
   .navbar-inner { height: 56px; }
   .grid-4,
   .grid-3,
