@@ -66,6 +66,7 @@ If `items` is empty but `paragraphs` contains `CONSIDERATIONS`, re-run `make par
 | JSON flag | Agent behavior |
 |-----------|----------------|
 | `meta_row` / `instruction` | Note row — apply to adjacent section; do not publish |
+| `content_notes` | Includes parenthetical cues stripped from `heading` / `sub` / `paragraphs` — never publish verbatim |
 | `heading_only` | Section title only — merge with **next** row’s block |
 | `multi_column` + `cell_texts` | May be layout columns — read all cells before picking a block |
 

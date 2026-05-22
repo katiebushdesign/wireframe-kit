@@ -48,7 +48,10 @@ Team cues may appear in any cell or on their own row. Common signals (not exhaus
 
 - `Note`, `Note to team:`, `Note to KBD team:`
 - `(note to team, …)`
+- **Whole line in parentheses** — usually layout/team direction, not published copy (e.g. `(Success stories leads — scrollable cards.)`)
 - `Kill eyebrow`, `KBD team: …`
+
+See [notes-and-cues.md](./notes-and-cues.md) for **parentheses vs real copy**.
 
 Parser and agent treat these as **meta**, not published copy. When phrasing is ambiguous, **prefer not publishing** the line and flag it in the build summary.
 

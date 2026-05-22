@@ -62,6 +62,8 @@ After `make parse-copy`, rows with **CONSIDERATIONS** in the doc have `heading`,
 
 Never copy `heading` / `sub` into the first card. See [assembling-pages.md](../../assembling-pages.md).
 
+**Parenthetical notes:** Parser moves `(…)` layout/team lines into `content_notes` and clears `sub` / `paragraphs`. Do not reintroduce them in HTML (e.g. a `sec-sub` that only restates “scrollable cards”).
+
 ## Section list item (from docx bullet + bold)
 
 ```json

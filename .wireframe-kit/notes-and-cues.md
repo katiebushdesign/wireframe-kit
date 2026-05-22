@@ -11,7 +11,9 @@ Treat a line or row as a **note / instruction** when it matches patterns like:
 | Signal | Examples |
 |--------|----------|
 | Starts with note language | `Note`, `Note:`, `Note to team:`, `Note to KBD team:` |
+| **Whole line in parentheses** | `(Success stories leads — scrollable cards.)` | **Note** — do not put in `sec-sub`, cards, or body |
 | Parenthetical team cue | `(note to team, kill eyebrow)` |
+| Parenthetical layout / UI | `(scrollable cards)`, `(photos not boxes)` |
 | KBD / team prefix | `KBD team:`, `Team:` (when clearly editorial, not a nav label) |
 | Kill / remove editorial | `Kill eyebrow`, `kill the pills` |
 | Structural instruction | `Do not fold into hero`, `net new`, `replaces content samples` |
@@ -21,6 +23,21 @@ Treat a line or row as a **note / instruction** when it matches patterns like:
 
 When unsure: **do not publish** the text; mention it in the build summary.
 
+## Parentheses — note vs published copy
+
+In KBD copy docs, **text wrapped in parentheses is usually a team or layout note**, not visitor-facing copy.
+
+| Pattern | Usually | Agent / parser |
+|---------|--------|----------------|
+| Entire line/cell is `(…)` | Note | Strip; store in `content_notes`; never render in HTML |
+| `(note to team, …)` inline | Note | Strip segment |
+| `(scrollable cards)`, `leads —`, wireframe/layout words inside `()` | Note | Strip |
+| `(optional)`, `(US)`, `(2024)`, short legal/product clarifier | Copy | May keep when clearly supplemental |
+
+**Example (do not publish):** Section H2 = `Real Impact, Real Results` and sub = `(Success stories leads — scrollable cards.)` → only the H2 is copy; the parenthetical is a build cue for cards below.
+
+After `make parse-copy`, check JSON: `sub` / `paragraphs` should be empty when the doc only had a parenthetical note. If you are patching HTML by hand, remove any `sec-sub` that matches a stripped `content_notes` entry.
+
 ## Note locations
 
 | Where | Example | Handling |
@@ -28,6 +45,7 @@ When unsure: **do not publish** the text; mention it in the build summary.
 | First cell / label position | `Hero` + `Kill eyebrow` jammed together | Normalize label to `Hero`; strip cue from label; record note |
 | Whole row (any cell count) | `Note, do not fold this into the hero…` | Meta row: apply to **previous** or **next** section |
 | Inline in copy | `(note to team, kill eyebrow)` | Strip from HTML; keep in build log |
+| Whole line in parentheses | `(Success stories leads — scrollable cards.)` | Strip; use for block choice only (e.g. scrollable card row) |
 | Own paragraph in body | `Note to KBD team: this section is net new` | Strip; may trigger **greenfield section** or **replace** |
 
 ## Heading-only rows

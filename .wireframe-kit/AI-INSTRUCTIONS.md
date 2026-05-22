@@ -67,7 +67,7 @@ Before parsing or writing copy: confirm `.docx` or `content/pages/*.json` exists
 1. **Docx or JSON only** — not plain text export.
 2. Map sections via [block-mapping.md](./block-mapping.md); fill `blocks/*.html` per [registry.json](blocks/registry.json).
 3. **One table per page**; each row is usually one section. Layout varies (1–N cells) — use JSON + judgment; see [copy-doc-format.md](./copy-doc-format.md).
-4. Strip **team notes** per [notes-and-cues.md](./notes-and-cues.md) (not an exhaustive phrase list).
+4. Strip **team notes** per [notes-and-cues.md](./notes-and-cues.md) (not an exhaustive phrase list). **Parenthetical lines** are usually notes — do not render as `sec-sub` or body copy unless clearly published clarifier text.
 5. Card count = bullets in section body (bold = title). Respect `heading_only`, `multi_column`, `meta_row` in JSON.
 6. **Revision** = patch repo-root HTML. **Greenfield** = assemble from blocks.
 7. **Do not** add ad-hoc page builders at repo root (e.g. `build-pages.py`). Use kit scripts only; HTML comes from **`blocks/*.html`** + JSON (see [assembling-pages.md](./assembling-pages.md)).

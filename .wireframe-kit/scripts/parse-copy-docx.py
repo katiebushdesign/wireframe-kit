@@ -23,6 +23,16 @@ NOTE_RE = re.compile(
 HEADING_ONLY_MAX = 120
 MEGA_RE = re.compile(r"MEGA\s*MENU", re.I)
 CONSIDERATIONS_SPLIT = re.compile(r"\*\*CONSIDERATIONS\*\*|\bCONSIDERATIONS\b", re.I)
+WHOLE_PAREN_RE = re.compile(r"^\s*\((.+)\)\s*\.?\s*$", re.S)
+PAREN_SEGMENT_RE = re.compile(r"\(([^)]+)\)")
+PAREN_NOTE_INSIDE_RE = re.compile(
+    r"(?i)\b("
+    r"note\s+to|scrollable|wireframe|layout|placeholder|kill\s|kbd\s+team|"
+    r"do\s+not\s+fold|net\s+new|leads\s+—|for\s+team|designer|not\s+published|"
+    r"internal|should\s+be\s+photos?|photos?\s+not|cards?\s+only|section\s+only|"
+    r"carousel|slider|component|block\s+only"
+    r")\b",
+)
 
 
 def cell_text(cell: ET.Element) -> str:
@@ -169,7 +179,132 @@ def parse_heading_sub_before_considerations(text: str) -> tuple[str, str, list[s
 
 
 def is_note_text(text: str) -> bool:
-    return bool(NOTE_RE.search(text.strip()))
+    text = text.strip()
+    if not text:
+        return False
+    if NOTE_RE.search(text):
+        return True
+    m = WHOLE_PAREN_RE.match(text)
+    if m and not looks_like_publishable_paren(m.group(1).strip()):
+        return True
+    return False
+
+
+def is_paren_note_content(inner: str) -> bool:
+    inner = inner.strip()
+    if not inner:
+        return False
+    if NOTE_RE.search(inner):
+        return True
+    if PAREN_NOTE_INSIDE_RE.search(inner):
+        return True
+    if re.search(r"[—–]", inner) and len(inner) < 160:
+        return True
+    if re.search(
+        r"(?i)\b(scrollable|carousel|slider|grid|wireframe|placeholder)\b", inner
+    ):
+        return True
+    return False
+
+
+def looks_like_publishable_paren(inner: str) -> bool:
+    """Rare in KBD copy docs: parenthetical text that stays in published copy."""
+    inner = inner.strip()
+    if not inner or is_paren_note_content(inner):
+        return False
+    if len(inner) <= 40 and re.match(
+        r"^(optional|required|US|UK|CA|Inc\.?|LLC|™|®|\d{4}|[A-Z]{2,5})$",
+        inner,
+        re.I,
+    ):
+        return True
+    return False
+
+
+def process_text_field(text: str) -> tuple[str, list[str]]:
+    """Split publishable copy from parenthetical notes."""
+    stripped = text.strip()
+    if not stripped:
+        return "", []
+
+    notes: list[str] = []
+    m = WHOLE_PAREN_RE.match(stripped)
+    if m:
+        inner = m.group(1).strip()
+        notes.append(stripped)
+        if looks_like_publishable_paren(inner):
+            return stripped, notes
+        return "", notes
+
+    def repl(match: re.Match[str]) -> str:
+        inner = match.group(1).strip()
+        if is_paren_note_content(inner):
+            notes.append(match.group(0))
+            return ""
+        return match.group(0)
+
+    cleaned = PAREN_SEGMENT_RE.sub(repl, stripped)
+    cleaned = re.sub(r"  +", " ", cleaned)
+    cleaned = re.sub(r"\s+([,.;:])", r"\1", cleaned).strip()
+    return cleaned, notes
+
+
+def collect_paren_notes_from_lines(text: str) -> list[str]:
+    found: list[str] = []
+    for line in text.splitlines():
+        _, notes = process_text_field(line.strip())
+        for n in notes:
+            if n not in found:
+                found.append(n)
+    return found
+
+
+def sanitize_publishable_fields(data: dict) -> dict:
+    """Remove parenthetical notes from fields agents map to HTML."""
+    content_notes = list(data.get("content_notes") or [])
+
+    for field in ("heading", "sub"):
+        val = (data.get(field) or "").strip()
+        if not val:
+            continue
+        cleaned, notes = process_text_field(val)
+        content_notes.extend(n for n in notes if n not in content_notes)
+        data[field] = cleaned
+
+    paras: list[str] = []
+    for p in data.get("paragraphs") or []:
+        cleaned, notes = process_text_field(p)
+        content_notes.extend(n for n in notes if n not in content_notes)
+        if cleaned:
+            paras.append(cleaned)
+    data["paragraphs"] = paras
+
+    for item in data.get("items") or []:
+        if not isinstance(item, dict):
+            continue
+        for key in ("title", "body"):
+            val = (item.get(key) or "").strip()
+            if not val:
+                continue
+            cleaned, notes = process_text_field(val)
+            content_notes.extend(n for n in notes if n not in content_notes)
+            item[key] = cleaned
+
+    content_notes.extend(
+        n for n in collect_paren_notes_from_lines(data.get("raw") or "") if n not in content_notes
+    )
+    data["content_notes"] = content_notes
+    return data
+
+
+def section_has_publishable_copy(content: dict) -> bool:
+    if (content.get("heading") or "").strip():
+        return True
+    if (content.get("sub") or "").strip():
+        return True
+    if content.get("paragraphs") or content.get("items"):
+        return True
+    return False
 
 
 def is_heading_only_row(label: str, content: dict) -> bool:
@@ -189,7 +324,13 @@ def is_heading_only_row(label: str, content: dict) -> bool:
 
 def parse_section_cell(text: str, paragraphs: list[dict]) -> dict:
     items = [x for x in paragraphs if x["type"] == "item"]
-    plain = [x["text"] for x in paragraphs if x["type"] == "p" and not x.get("is_list")]
+    plain: list[str] = []
+    for x in paragraphs:
+        if x["type"] != "p" or x.get("is_list"):
+            continue
+        cleaned, _ = process_text_field(x["text"])
+        if cleaned:
+            plain.append(cleaned)
     content_notes = [
         m.group(0)
         for line in text.splitlines()
@@ -201,10 +342,11 @@ def parse_section_cell(text: str, paragraphs: list[dict]) -> dict:
         ]
         if m
     ]
+    content_notes.extend(collect_paren_notes_from_lines(text))
     consideration_items = parse_consideration_items_from_text(text)
     if consideration_items:
         heading, sub, extra_paras = parse_heading_sub_before_considerations(text)
-        return {
+        data = {
             "heading": heading or (plain[0] if plain else ""),
             "sub": sub,
             "paragraphs": extra_paras,
@@ -212,9 +354,10 @@ def parse_section_cell(text: str, paragraphs: list[dict]) -> dict:
             "content_notes": content_notes,
             "raw": text,
         }
+        return sanitize_publishable_fields(data)
     heading = plain[0] if plain else ""
     body_paras = plain[1:] if len(plain) > 1 else []
-    return {
+    data = {
         "heading": heading,
         "sub": "",
         "paragraphs": body_paras,
@@ -222,6 +365,7 @@ def parse_section_cell(text: str, paragraphs: list[dict]) -> dict:
         "content_notes": content_notes,
         "raw": text,
     }
+    return sanitize_publishable_fields(data)
 
 
 def page_title_from_row(cells: list[ET.Element]) -> str:
@@ -260,6 +404,18 @@ def parse_section_row(cells: list[ET.Element]) -> dict | None:
                 "raw": body_text,
             }
         content = parse_section_cell(body_text, paras)
+        if not section_has_publishable_copy(content) and content.get("content_notes"):
+            return {
+                "label": "",
+                "meta_row": True,
+                "instruction": content["content_notes"][0],
+                "heading": "",
+                "sub": "",
+                "paragraphs": [],
+                "items": [],
+                "content_notes": content["content_notes"],
+                "raw": body_text,
+            }
         if is_heading_only_row(body_text, content):
             return {
                 "label": body_text,
