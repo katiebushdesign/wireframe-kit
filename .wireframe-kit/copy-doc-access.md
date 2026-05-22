@@ -13,6 +13,17 @@ When the copy doc is a **Google Doc URL** and you **cannot read it** (403, “re
 3. **Wait** for one of the above before building copy from the doc.
 4. If they have **no copy doc yet**, say so and continue only with placeholders they approve — do not fabricate client copy.
 
+## Multiple tabs (which content to use)
+
+Google Docs may have **more than one tab** in the same file. Before `make parse-copy` or building HTML from the doc:
+
+1. Check `copy_doc_tab` in `client.yaml` if set — use that tab.
+2. If the user already said which tab in the prompt, use it.
+3. If **multiple tabs look like wireframe copy** (page tables, mega menu, etc.) and you are **not sure** which is canonical → **ask** which tab to use. List tab names; wait for an answer.
+4. Do **not** combine tabs, pick the first tab, or assume “the leftmost tab” without confirmation.
+
+See [copy-doc-format.md](./copy-doc-format.md) for structure; optional config: `copy_doc_tab` in `client.yaml.example`.
+
 ## Forbidden when access fails
 
 Do **not**:

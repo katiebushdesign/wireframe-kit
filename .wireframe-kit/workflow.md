@@ -37,6 +37,8 @@ Load skill **`create-wireframe`** — intake questions, then Phases 1–4 in ord
 
 **Access:** If the agent cannot open the Google Doc URL, follow [copy-doc-access.md](./copy-doc-access.md) — ask for share/link/OAuth or a manual `.docx`. Do not web-search or scan the user’s computer for the file.
 
+**Tabs:** If the doc has multiple tabs and the user did not specify which, the agent **asks** (or uses `copy_doc_tab` in `client.yaml`) before ingest.
+
 1. Export doc as **`.docx`** (Drive API or Download).
 2. Save to `.wireframe-kit/content/source/copy.docx` (gitignored if large).
 3. Run from repo root: `make parse-copy`

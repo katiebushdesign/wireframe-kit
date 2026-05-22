@@ -8,6 +8,19 @@ Canonical example: link in `.wireframe-kit/config/client.yaml`.
 2. **Mega menu tables** — multi-column grids; row 0 = `SOLUTIONS MEGA MENU`, etc.
 3. **Page tables** — **one table per wireframe page** (this rule stays strict).
 
+### Multiple tabs in one Google Doc
+
+Some copy docs use **multiple document tabs** (e.g. “Wireframes”, “Archive”, “Nav only”). Only **one tab** is the source of truth for a given run.
+
+| Situation | Agent behavior |
+|-----------|----------------|
+| User or `copy_doc_tab` in `client.yaml` names the tab | Use that tab only |
+| One tab clearly holds all page tables for this project | Proceed |
+| Several tabs could be wireframe copy and you were **not** told which | **Stop and ask** which tab to use — do not merge tabs or guess |
+| Tab looks like notes/archive only | Ignore unless the user says otherwise |
+
+When asking, list the **tab names** you can see and ask which to parse/export.
+
 ## Page tables (flexible layout)
 
 Writers do not need a rigid two-column grid. Tables vary: merged title rows, one cell per row, two columns (label + copy), or **extra columns that represent wireframe layout** (e.g. left column / right column on the page) rather than “section name / body.”

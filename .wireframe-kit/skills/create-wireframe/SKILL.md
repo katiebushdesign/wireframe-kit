@@ -26,6 +26,7 @@ Ask the user for anything missing. Use structured questions when the tool is ava
 |---|----------|-----|
 | 1 | **Client / project name** | `config/client.yaml` |
 | 2 | **Copy doc URL** (Google Doc) or **no copy doc yet** | Source of truth; can skip parse until doc exists |
+| 2b | **Which doc tab?** (if the file has multiple tabs) | Set `copy_doc_tab` in `client.yaml` or answer when agent asks — do not guess |
 | 3 | **Greenfield or revision?** | Greenfield = assemble from `blocks/`; revision = patch existing repo-root HTML |
 | 4 | **Pages to build** (titles + URL paths) or **derive from doc after export** | `config/site-map.yaml` |
 | 5 | **Client name** for repo (e.g. `212-visual`, `acme-health`) | Repo: `katiebushdesign/{clientname}-wireframes` |
@@ -87,7 +88,7 @@ Requires `gh` CLI authenticated for `katiebushdesign`.
 
 ## Phase 2 — Copy → JSON (if docx exists)
 
-**Before parse:** If `copy_doc_url` is unreachable (permissions / sign-in), **stop** — do not web-search or search the user’s machine. Follow [copy-doc-access.md](../copy-doc-access.md) and ask for share, link access, OAuth, or manual `.docx` at `copy_docx_path`.
+**Before parse:** If `copy_doc_url` is unreachable (permissions / sign-in), **stop** — do not web-search or search the user’s machine. Follow [copy-doc-access.md](../copy-doc-access.md) and ask for share, link access, OAuth, or manual `.docx` at `copy_docx_path`. If the doc has **multiple tabs** and `copy_doc_tab` is unset, **ask which tab** before exporting/parsing.
 
 ```bash
 make parse-copy
@@ -155,3 +156,4 @@ Report to the user:
 | `gh` auth / org permission | User runs `gh auth login`; needs create-repo on `katiebushdesign` |
 | Repo name taken | Pick a different slug or use existing repo + verify Pages |
 | Copy doc 403 / no access | [copy-doc-access.md](../copy-doc-access.md) — share doc, link viewer, OAuth, or manual `.docx`; **never** web-search or `~/` file hunt |
+| Multiple doc tabs, unclear which | Ask user; set `copy_doc_tab` — do not merge tabs or pick one silently |

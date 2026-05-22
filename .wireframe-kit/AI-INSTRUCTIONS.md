@@ -12,6 +12,8 @@ If the Google Doc in `client.yaml` is **not readable** (permissions, sign-in, 40
 
 **Never** web-search for doc content or search the user’s machine (`~/Desktop`, `~/Downloads`, etc.) as a workaround.
 
+**Multiple doc tabs:** If the Google Doc has several tabs and the user did not specify which (and `copy_doc_tab` is unset), **ask** before parsing or applying copy — do not guess. See [copy-doc-format.md](./copy-doc-format.md).
+
 ---
 
 ## New session: create wireframe
@@ -52,7 +54,7 @@ make serve         # local preview http://localhost:8765/ (background; make serv
 
 ### Access check (first)
 
-Before parsing or writing copy: confirm `.docx` or `content/pages/*.json` exists, or that authenticated Google access works. If not → [copy-doc-access.md](./copy-doc-access.md). Do not proceed with invented copy.
+Before parsing or writing copy: confirm `.docx` or `content/pages/*.json` exists, or that authenticated Google access works. If not → [copy-doc-access.md](./copy-doc-access.md). If the doc has **multiple tabs** and the active tab is unclear → ask (or use `copy_doc_tab` in `client.yaml`). Do not proceed with invented copy.
 
 ### Inputs
 

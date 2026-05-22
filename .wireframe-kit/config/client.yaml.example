@@ -11,6 +11,9 @@ preview_base_url: https://katiebushdesign.github.io/212-visual-wireframes/
 # Agent needs Viewer access, link sharing, OAuth, or a manual .docx — see copy-doc-access.md
 copy_doc_url: https://docs.google.com/document/d/YOUR_DOC_ID/edit
 
+# Optional: tab name when the Google Doc has multiple tabs (agent asks if unset)
+# copy_doc_tab: Wireframes
+
 copy_docx_path: .wireframe-kit/content/source/copy.docx
 
 # Optional: Marker.io project id (leave empty to omit)

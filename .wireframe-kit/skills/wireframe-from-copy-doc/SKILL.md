@@ -14,6 +14,8 @@ description: >-
 
 **If the Google Doc is not readable:** stop per `copy-doc-access.md` — ask for permissions, OAuth, or `.docx` export. Do not web-search or search the user’s computer.
 
+**Multiple tabs:** If unsure which tab holds wireframe copy, ask before parsing (use `copy_doc_tab` in `client.yaml` when set).
+
 **JSON examples:** [reference.md](reference.md)
 
 **Command:** `make parse-copy` (from repo root)
