@@ -44,11 +44,12 @@ body {
   position: sticky;
   top: 0;
   z-index: 100;
+  padding: 0 40px;
 }
 .navbar-inner {
   max-width: var(--content-w);
   margin: 0 auto;
-  padding: 0 40px;
+  padding: 0;
   height: 60px;
   display: flex;
   align-items: center;
@@ -70,23 +71,34 @@ body {
   outline-offset: 3px;
   border-radius: 2px;
 }
-.nav-links { display: flex; gap: 2px; }
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
 .nav-item { position: relative; }
 .nav-btn {
   background: none;
   border: none;
   color: rgba(255,255,255,0.6);
   font-size: 13px;
+  font-weight: 400;
   font-family: inherit;
-  padding: 6px 14px;
+  line-height: 1;
+  min-height: 36px;
+  padding: 0 14px;
   border-radius: 5px;
   cursor: pointer;
-  display: flex;
+  display: inline-flex;
   align-items: center;
+  justify-content: center;
   gap: 5px;
+  text-decoration: none;
+  box-sizing: border-box;
   transition: background 0.15s, color 0.15s;
   white-space: nowrap;
 }
+button.nav-btn { appearance: none; }
 .nav-btn:hover, .nav-btn.active {
   background: rgba(255,255,255,0.08);
   color: #fff;
