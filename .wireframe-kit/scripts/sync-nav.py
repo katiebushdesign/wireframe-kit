@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Sync mega menu nav from index.html to all pages."""
+"""Sync site nav from index.html to all pages (desktop + mobile + mega backdrop)."""
 from pathlib import Path
 import re
 
@@ -7,13 +7,19 @@ KIT_ROOT = Path(__file__).resolve().parent.parent
 root = KIT_ROOT.parent  # repo root (HTML pages)
 index = (root / "index.html").read_text()
 nav_pattern = re.compile(
-    r"(?:<!-- NAV -->\n)?<nav class=\"navbar\">.*?</nav>\n<div class=\"mega-backdrop\" id=\"mega-backdrop\"></div>",
+    r"(?:<!-- NAV[^\n]*\n)?"
+    r"<nav class=\"navbar\">.*?</nav>\n"
+    r"<div class=\"nav-mobile\" id=\"nav-mobile\">.*?</div>\n"
+    r"<div class=\"mega-backdrop\" id=\"mega-backdrop\"></div>",
     re.DOTALL,
 )
 
 m = nav_pattern.search(index)
 if not m:
-    raise SystemExit("nav block not found in index.html")
+    raise SystemExit(
+        "nav block not found in index.html "
+        "(expected navbar + nav-mobile + mega-backdrop; see blocks/nav-shell.html)"
+    )
 nav_root = m.group(0)
 nav_sub = re.sub(r'href="', 'href="../', nav_root)
 
@@ -26,7 +32,7 @@ for path in sorted(root.rglob("*.html")):
     if ".wireframe-kit" in path.parts or path.name in SKIP:
         continue
     text = path.read_text()
-    if "mega-panel" not in text:
+    if 'class="navbar"' not in text:
         continue
     rel = path.relative_to(root).as_posix()
     use_sub = "/" in rel and rel not in ROOT_FILES

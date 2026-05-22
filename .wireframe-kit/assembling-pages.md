@@ -10,6 +10,20 @@ How to turn `content/pages/*.json` into repo-root HTML **without** custom build 
 4. Copy markup from `blocks/<id>.html`, replace `{{placeholders}}`, expand `<!-- repeat -->` for lists.
 5. `make validate-blocks` · `make sync` (if nav changed).
 
+## Site shell (nav)
+
+Start from [blocks/nav-shell.html](./blocks/nav-shell.html) in `index.html`:
+
+- Desktop: `.nav-links--desktop` + optional `data-mega` panels
+- Mobile (≤1023px): `#nav-mobile` panel + `.nav-toggle` — mirror the same links
+- Every page: `<script src="js/nav.js">` (use `../js/nav.js` one level down)
+
+`make sync` copies navbar + mobile panel + mega backdrop from `index.html` to other pages.
+
+## Responsive layout
+
+`css/style.css` is mobile-first friendly: no horizontal scroll, grids stack at breakpoints (`grid-3` / `grid-4` → 2 columns → 1). Use kit grid classes; avoid fixed widths on cards. Test at ~375px and ~768px after assembly.
+
 ## Do not
 
 | Avoid | Do instead |

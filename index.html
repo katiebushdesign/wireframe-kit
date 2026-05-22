@@ -8,18 +8,29 @@
 </head>
 <body>
 
-<!-- NAV: replace with your nav; run make sync after editing index.html mega menu -->
+<!-- NAV: edit in index.html; run make sync. See .wireframe-kit/blocks/nav-shell.html -->
 <nav class="navbar">
   <div class="navbar-inner">
     <a href="index.html" class="nav-logo" aria-label="Logo"></a>
-    <div class="nav-links">
-      <a href="index.html" class="nav-btn" style="text-decoration:none;padding:8px 12px;">Home</a>
+    <div class="nav-links nav-links--desktop">
+      <a href="index.html" class="nav-btn">Home</a>
     </div>
     <div class="nav-right">
-      <a href="#" class="nav-cta">Primary CTA</a>
+      <a href="#" class="nav-cta nav-cta--desktop">Primary CTA</a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-mobile" aria-label="Open menu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
     </div>
   </div>
 </nav>
+<div class="nav-mobile" id="nav-mobile">
+  <div class="nav-mobile-inner">
+    <a href="index.html" class="nav-mobile-link">Home</a>
+    <a href="#" class="nav-mobile-cta">Primary CTA</a>
+  </div>
+</div>
 <div class="mega-backdrop" id="mega-backdrop"></div>
 
 <!-- Example: homepage hero (from blocks/hero-landing.html) -->
@@ -38,7 +49,7 @@
 <section class="section-white pad-xl">
   <div class="inner">
     <h2 class="sec-h2">Example card section</h2>
-    <p class="sec-sub" style="margin-top:16px;max-width:720px;">Uses <code>cards-grid</code> block classes — all styled via <code>css/style.css</code>.</p>
+    <p class="sec-sub" style="margin-top:16px;max-width:720px;">Uses <code>cards-grid</code> block classes — all styled via <code>css/style.css</code>. Grids stack on smaller viewports.</p>
     <div class="grid-3" style="margin-top:40px;">
       <div class="card-grey">
         <div class="card-title">Card one</div>
@@ -78,11 +89,6 @@
   </div>
 </footer>
 
-<script>
-(function(){
-  var backdrop = document.getElementById('mega-backdrop');
-  if (backdrop) backdrop.addEventListener('click', function(){});
-})();
-</script>
+<script src="js/nav.js"></script>
 </body>
 </html>

@@ -1,0 +1,28 @@
+<!-- block: nav-shell (site chrome — not from copy doc) -->
+<!-- Copy into index.html; run make sync after edits. Subpages: ../js/nav.js -->
+<nav class="navbar">
+  <div class="navbar-inner">
+    <a href="index.html" class="nav-logo" aria-label="Logo"></a>
+    <div class="nav-links nav-links--desktop">
+      <a href="index.html" class="nav-btn">Home</a>
+      <!-- Add links, mega triggers (data-mega="mega-id"), etc. -->
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-cta nav-cta--desktop">Primary CTA</a>
+      <button type="button" class="nav-toggle" aria-expanded="false" aria-controls="nav-mobile" aria-label="Open menu">
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+        <span class="nav-toggle-bar"></span>
+      </button>
+    </div>
+  </div>
+</nav>
+<div class="nav-mobile" id="nav-mobile">
+  <div class="nav-mobile-inner">
+    <!-- Mirror desktop IA; use nav-mobile-link / nav-mobile-sublink / nav-mobile-label -->
+    <a href="index.html" class="nav-mobile-link">Home</a>
+    <a href="#" class="nav-mobile-cta">Primary CTA</a>
+  </div>
+</div>
+<div class="mega-backdrop" id="mega-backdrop"></div>
+<!-- Optional: mega-panel blocks below backdrop -->
