@@ -74,6 +74,8 @@ Structure: header row + grid of columns; cells contain title+description (often 
 | `.txt` | Human read only; **do not** use for parsing |
 | PDF | Not supported |
 
+**Restricted doc?** Agents must not guess copy — see [copy-doc-access.md](./copy-doc-access.md) (share, OAuth, or manual download).
+
 ## Writer guidelines (paste into doc intro)
 
 1. One **table per page**; page name in the top row.

@@ -40,6 +40,7 @@ Apply the latest copy doc to the wireframes.
 
 ## More detail
 
+- [Copy doc access](.wireframe-kit/copy-doc-access.md) — if the agent can’t open the Google Doc, it should ask you for permissions or a `.docx` export (not search the web or your computer)
 - [Copy doc format](.wireframe-kit/copy-doc-format.md)
 - [Kit docs](.wireframe-kit/README.md) · [Agent instructions](.wireframe-kit/AI-INSTRUCTIONS.md)
 

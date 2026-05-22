@@ -4,7 +4,7 @@
 
 **New wireframe / onboard:** load skill **`create-wireframe`** (or `/create-wireframe`) — intake questions, then execute.
 
-**Agents — read first:** [`.wireframe-kit/AI-INSTRUCTIONS.md`](.wireframe-kit/AI-INSTRUCTIONS.md)
+**Agents — read first:** [`.wireframe-kit/AI-INSTRUCTIONS.md`](.wireframe-kit/AI-INSTRUCTIONS.md) · [copy doc access if URL blocked](.wireframe-kit/copy-doc-access.md)
 
 ```bash
 make link-skills       # once after clone

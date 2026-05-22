@@ -8,7 +8,7 @@ Everything for **copy doc → HTML wireframe → deploy** lives in this director
 .wireframe-kit/
   AI-INSTRUCTIONS.md    ← agents: canonical procedures
   README.md             ← you are here
-  workflow.md  assembling-pages.md  github-setup.md  copy-doc-format.md  block-mapping.md  notes-and-cues.md
+  workflow.md  assembling-pages.md  github-setup.md  copy-doc-format.md  copy-doc-access.md  block-mapping.md  notes-and-cues.md
   agent-integrations.md
   config/               client.yaml, site-map.yaml
   skills/               create-wireframe, wireframe-from-copy-doc, wireframe-html-blocks

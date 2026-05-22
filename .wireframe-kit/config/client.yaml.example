@@ -8,6 +8,7 @@ github_org: katiebushdesign
 github_repo: 212-visual-wireframes
 preview_base_url: https://katiebushdesign.github.io/212-visual-wireframes/
 
+# Agent needs Viewer access, link sharing, OAuth, or a manual .docx — see copy-doc-access.md
 copy_doc_url: https://docs.google.com/document/d/YOUR_DOC_ID/edit
 
 copy_docx_path: .wireframe-kit/content/source/copy.docx

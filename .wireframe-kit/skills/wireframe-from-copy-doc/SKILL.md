@@ -10,7 +10,9 @@ description: >-
 
 **Follow:** [`AI-INSTRUCTIONS.md`](../AI-INSTRUCTIONS.md) — Task: **Apply copy from doc**.
 
-**Also read:** [`assembling-pages.md`](../assembling-pages.md), [`notes-and-cues.md`](../notes-and-cues.md), [`block-mapping.md`](../block-mapping.md), `../config/client.yaml`, `../config/site-map.yaml`.
+**Also read:** [`copy-doc-access.md`](../copy-doc-access.md) (if URL blocked), [`assembling-pages.md`](../assembling-pages.md), [`notes-and-cues.md`](../notes-and-cues.md), [`block-mapping.md`](../block-mapping.md), `../config/client.yaml`, `../config/site-map.yaml`.
+
+**If the Google Doc is not readable:** stop per `copy-doc-access.md` — ask for permissions, OAuth, or `.docx` export. Do not web-search or search the user’s computer.
 
 **JSON examples:** [reference.md](reference.md)
 

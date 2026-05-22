@@ -2,7 +2,15 @@
 
 **Agent-agnostic.** Root stubs (`AGENTS.md`, `CLAUDE.md`) and skills in `.wireframe-kit/skills/` point here.
 
-Kit docs: [README.md](./README.md) · [workflow.md](./workflow.md) · [copy-doc-format.md](./copy-doc-format.md)
+Kit docs: [README.md](./README.md) · [workflow.md](./workflow.md) · [copy-doc-format.md](./copy-doc-format.md) · [copy-doc-access.md](./copy-doc-access.md)
+
+---
+
+## Copy doc access (mandatory)
+
+If the Google Doc in `client.yaml` is **not readable** (permissions, sign-in, 403): **stop** and follow [copy-doc-access.md](./copy-doc-access.md). Ask the user to share the doc, change link access, complete **OAuth** (when available), or place a **`.docx`** export at `copy_docx_path`.
+
+**Never** web-search for doc content or search the user’s machine (`~/Desktop`, `~/Downloads`, etc.) as a workaround.
 
 ---
 
@@ -41,6 +49,10 @@ make serve         # local preview http://localhost:8765/ (background; make serv
 ---
 
 ## Task: Apply copy from doc
+
+### Access check (first)
+
+Before parsing or writing copy: confirm `.docx` or `content/pages/*.json` exists, or that authenticated Google access works. If not → [copy-doc-access.md](./copy-doc-access.md). Do not proceed with invented copy.
 
 ### Inputs
 

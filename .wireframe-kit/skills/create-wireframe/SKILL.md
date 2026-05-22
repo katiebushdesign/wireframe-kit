@@ -87,6 +87,8 @@ Requires `gh` CLI authenticated for `katiebushdesign`.
 
 ## Phase 2 — Copy → JSON (if docx exists)
 
+**Before parse:** If `copy_doc_url` is unreachable (permissions / sign-in), **stop** — do not web-search or search the user’s machine. Follow [copy-doc-access.md](../copy-doc-access.md) and ask for share, link access, OAuth, or manual `.docx` at `copy_docx_path`.
+
 ```bash
 make parse-copy
 # or: python3 .wireframe-kit/scripts/parse-copy-docx.py .wireframe-kit/content/source/<file>.docx
@@ -152,3 +154,4 @@ Report to the user:
 | No commits yet | Commit locally before `setup-github-repo.sh` |
 | `gh` auth / org permission | User runs `gh auth login`; needs create-repo on `katiebushdesign` |
 | Repo name taken | Pick a different slug or use existing repo + verify Pages |
+| Copy doc 403 / no access | [copy-doc-access.md](../copy-doc-access.md) — share doc, link viewer, OAuth, or manual `.docx`; **never** web-search or `~/` file hunt |
