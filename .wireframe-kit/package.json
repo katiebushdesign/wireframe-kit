@@ -1,0 +1,12 @@
+{
+  "name": "wireframe-kit-figma",
+  "private": true,
+  "type": "module",
+  "description": "Playwright helpers for HTML wireframe → Figma capture",
+  "scripts": {
+    "figma:capture-all": "bash scripts/figma-capture-all.sh"
+  },
+  "devDependencies": {
+    "playwright": "^1.49.0"
+  }
+}

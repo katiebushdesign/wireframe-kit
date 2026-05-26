@@ -3,6 +3,7 @@
 | Skill | When |
 |-------|------|
 | `create-wireframe` | Onboard + full run (intake → config → parse → build → validate) |
+| `wireframe-to-figma` | Export HTML wireframes to Figma (capture, layout, components) |
 | `wireframe-from-copy-doc` | Copy pass only |
 | `wireframe-html-blocks` | Blocks / structure only |
 

@@ -9,3 +9,4 @@
 .agents/skills
 
 .wireframe-kit/.preview-server.pid
+.wireframe-kit/node_modules/
