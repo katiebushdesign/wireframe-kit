@@ -74,8 +74,20 @@ For each page JSON:
 
 Team notes (any cell) apply in **both** modes — instructions, not published copy. Agents distinguish notes from copy per [notes-and-cues.md](./notes-and-cues.md).
 
+## Phase 6 — Figma export (optional)
+
+When the client needs wireframes in Figma:
+
+1. Load skill **`wireframe-to-figma`** or read [figma-html-export.md](./figma-html-export.md).
+2. `cp config/figma.yaml.example config/figma.yaml` — set `file_key`, `wireframes_page_id`.
+3. `make figma-init-manifest` from `site-map.yaml`.
+4. `make figma-install-deps` → `make serve` → `make figma-capture-all`.
+5. Agent polls captures via Figma MCP, layouts frames, builds shared nav/footer/logo components.
+
+HTML remains source of truth; Figma is for design review and handoff.
+
 ## What we do not automate (yet)
 
-- Figma ↔ HTML
 - Full CMS
 - Auto-deploy on every Google Doc edit (optional later: Drive webhook + CI)
+- Automatic re-sync Figma when HTML changes (re-capture is manual / on demand)

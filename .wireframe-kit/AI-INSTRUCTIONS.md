@@ -2,7 +2,7 @@
 
 **Agent-agnostic.** Root stubs (`AGENTS.md`, `CLAUDE.md`) and skills in `.wireframe-kit/skills/` point here.
 
-Kit docs: [README.md](./README.md) · [workflow.md](./workflow.md) · [copy-doc-format.md](./copy-doc-format.md) · [copy-doc-access.md](./copy-doc-access.md)
+Kit docs: [README.md](./README.md) · [workflow.md](./workflow.md) · [figma-html-export.md](./figma-html-export.md) · [copy-doc-format.md](./copy-doc-format.md) · [copy-doc-access.md](./copy-doc-access.md)
 
 ---
 
@@ -46,6 +46,12 @@ make sync          # nav + footer on site HTML
 make link-skills   # symlink skills for Cursor / Claude / OpenClaw
 make setup-github  # SLUG=clientname — katiebushdesign repo + Pages (see github-setup.md)
 make serve         # local preview http://localhost:8765/ (background; make serve-stop)
+
+# HTML → Figma (see figma-html-export.md, skill wireframe-to-figma)
+make figma-install-deps
+make figma-init-manifest
+make figma-check
+make figma-capture-all
 ```
 
 ---
@@ -116,12 +122,26 @@ See `.wireframe-kit/skills/wireframe-from-copy-doc/reference.md`.
 
 ---
 
+## Task: Export to Figma
+
+Load skill **`wireframe-to-figma`**. Full guide: [figma-html-export.md](./figma-html-export.md).
+
+**Prerequisites:** HTML built and reviewed locally; Figma MCP enabled; `make figma-install-deps`; `config/figma.yaml` + `config/figma-capture-manifest.json`.
+
+**Order:** `make sync` → `make serve` → `make figma-check` → `make figma-capture-all` → poll each `captureId` with `generate_figma_design` → layout frames on Wireframes page → build/swap **Site / Nav**, **Site / Footer**, **Site / Logo** on `— Components —`.
+
+**Do not** use `figma-capture-pages.mjs` (batch await hangs). Use `figma-capture-one.mjs` via `make figma-capture-all`.
+
+**Config:** `config/figma.yaml`, `config/site-map.yaml`, generated `config/figma-capture-manifest.json`.
+
+---
+
 ## Tool entry points
 
 | Type | Location |
 |------|----------|
 | Procedures | `.wireframe-kit/AI-INSTRUCTIONS.md` |
-| Skills | `.wireframe-kit/skills/*/SKILL.md` (start: `create-wireframe`) |
+| Skills | `.wireframe-kit/skills/*/SKILL.md` (start: `create-wireframe`; Figma: `wireframe-to-figma`) |
 | Stubs | repo root `AGENTS.md`, `CLAUDE.md` |
 
 [agent-integrations.md](./agent-integrations.md)

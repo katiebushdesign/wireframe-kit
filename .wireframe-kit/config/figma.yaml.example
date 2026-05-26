@@ -1,0 +1,32 @@
+# Copy to figma.yaml and fill per client Figma file.
+# Used by agents (wireframe-to-figma skill) and documented in figma-html-export.md.
+
+# Figma design file
+file_key: YOUR_FILE_KEY          # from figma.com/design/<file_key>/...
+file_url: https://www.figma.com/design/YOUR_FILE_KEY/Client-Wireframes
+
+# Target page for html-to-design captures (Figma page node id, e.g. 10:2)
+wireframes_page_id: ""
+wireframes_page_name: Wireframes
+
+# Optional design-system pages (names — agent creates if missing)
+foundations_page_name: "— Foundations —"
+components_page_name: "— Components —"
+
+# Layout on Wireframes page
+viewport_width: 1440
+viewport_height: 900
+frame_gap_px: 200
+
+# Nav/footer component sizing (match css/style.css)
+content_width: 1200
+site_padding_x: 40
+nav_height: 60
+
+# Capture script defaults (override with env TIMEOUT_MS / PORT)
+capture_timeout_ms: 12000
+capture_delay_between_pages_ms: 3000
+
+# Local preview (must match make serve)
+# preview_port: 8765
+# Or set full base: WIREFRAME_BASE=http://localhost:8890

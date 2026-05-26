@@ -6,7 +6,8 @@ DOCX ?= $(KIT_ROOT)content/source/copy.docx
 
 PORT ?= 8765
 
-.PHONY: help parse-copy sync link-skills validate-blocks setup-github clean-content serve serve-stop serve-status
+.PHONY: help parse-copy sync link-skills validate-blocks setup-github clean-content serve serve-stop serve-status \
+	figma-install-deps figma-check figma-init-manifest figma-capture-all figma-capture-one figma-list-captures
 
 help:
 	@echo ".wireframe-kit targets:"
@@ -18,6 +19,11 @@ help:
 	@echo "  make clean-content     — remove generated pages/nav JSON and source docx"
 	@echo "  make serve             — local preview at http://localhost:$(PORT)/ (background)"
 	@echo "  make serve-stop        — stop local preview server"
+	@echo "  make figma-install-deps — npm ci + Playwright Chromium (for HTML → Figma)"
+	@echo "  make figma-check         — preflight: node, playwright, preview, manifest"
+	@echo "  make figma-init-manifest — site-map.yaml → config/figma-capture-manifest.json"
+	@echo "  make figma-capture-all   — submit all pages to Figma capture API"
+	@echo "  make figma-list-captures — print captureIds for MCP poll"
 
 parse-copy:
 	python3 $(KIT_ROOT)scripts/parse-copy-docx.py $(DOCX)
@@ -49,3 +55,22 @@ serve-stop:
 
 serve-status:
 	PORT=$(PORT) $(KIT_ROOT)scripts/serve-local.sh status
+
+figma-install-deps:
+	cd $(KIT_ROOT) && npm ci && npx playwright install chromium
+
+figma-check:
+	PORT=$(PORT) WIREFRAME_BASE="$(WIREFRAME_BASE)" FIGMA_MANIFEST="$(FIGMA_MANIFEST)" $(KIT_ROOT)scripts/figma-check-deps.sh
+
+figma-init-manifest:
+	MERGE=$(MERGE) node $(KIT_ROOT)scripts/figma-init-manifest.mjs
+
+figma-capture-all:
+	PORT=$(PORT) WIREFRAME_BASE="$(WIREFRAME_BASE)" FIGMA_MANIFEST="$(FIGMA_MANIFEST)" SKIP_PATH="$(SKIP_PATH)" $(KIT_ROOT)scripts/figma-capture-all.sh
+
+figma-capture-one:
+	@test -n "$(CAPTURE_ID)" && test -n "$(PATH)" || (echo "Usage: make figma-capture-one CAPTURE_ID=<uuid> PATH=index.html" >&2; exit 1)
+	PORT=$(PORT) WIREFRAME_BASE="$(WIREFRAME_BASE)" node $(KIT_ROOT)scripts/figma-capture-one.mjs "$(CAPTURE_ID)" "$(PATH)"
+
+figma-list-captures:
+	node $(KIT_ROOT)scripts/figma-poll-captures.mjs $(FIGMA_MANIFEST)

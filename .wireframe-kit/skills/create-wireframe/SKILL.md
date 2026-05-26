@@ -129,6 +129,14 @@ make serve         # start local preview (background, default http://localhost:8
 
 ---
 
+## Phase 5 — Figma export (optional)
+
+If the user wants wireframes in Figma, hand off to **`wireframe-to-figma`** or [figma-html-export.md](../figma-html-export.md):
+
+`figma.yaml` → `figma-init-manifest` → `figma-install-deps` → `serve` → `figma-capture-all` → MCP poll → layout + components.
+
+---
+
 ## Phase 4 — Handoff
 
 Report to the user:

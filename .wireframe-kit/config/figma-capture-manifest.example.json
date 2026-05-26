@@ -1,0 +1,12 @@
+[
+  {
+    "label": "Homepage",
+    "path": "index.html",
+    "captureId": "00000000-0000-4000-8000-000000000001"
+  },
+  {
+    "label": "About",
+    "path": "company/about.html",
+    "captureId": "00000000-0000-4000-8000-000000000002"
+  }
+]
