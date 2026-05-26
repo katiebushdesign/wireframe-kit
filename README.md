@@ -28,6 +28,14 @@ Preview URL: `https://katiebushdesign.github.io/212-visual-wireframes/`
 
 ---
 
+## Export to Figma
+
+```
+/wireframe-to-figma — export this site to https://www.figma.com/design/YOUR_FILE_KEY/Client-Wireframes
+```
+
+---
+
 ## Copy updates
 
 Edit the Google Doc, then:
@@ -42,6 +50,6 @@ Apply the latest copy doc to the wireframes.
 
 - [Copy doc access](.wireframe-kit/copy-doc-access.md) — if the agent can’t open the Google Doc, it should ask you for permissions or a `.docx` export (not search the web or your computer)
 - [Copy doc format](.wireframe-kit/copy-doc-format.md)
-- [Kit docs](.wireframe-kit/README.md) · [Agent instructions](.wireframe-kit/AI-INSTRUCTIONS.md)
+- [Kit docs](.wireframe-kit/README.md) · [Agent instructions](.wireframe-kit/AI-INSTRUCTIONS.md) · [Figma export](.wireframe-kit/figma-html-export.md)
 
 **Optional (terminal):** `make serve` for local preview · `make link-skills` after cloning yourself

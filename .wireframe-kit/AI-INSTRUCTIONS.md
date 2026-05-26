@@ -130,8 +130,6 @@ Load skill **`wireframe-to-figma`**. Full guide: [figma-html-export.md](./figma-
 
 **Order:** `make sync` → `make serve` → `make figma-check` → `make figma-capture-all` → poll each `captureId` with `generate_figma_design` → layout frames on Wireframes page → build/swap **Site / Nav**, **Site / Footer**, **Site / Logo** on `— Components —`.
 
-**Do not** use `figma-capture-pages.mjs` (batch await hangs). Use `figma-capture-one.mjs` via `make figma-capture-all`.
-
 **Config:** `config/figma.yaml`, `config/site-map.yaml`, generated `config/figma-capture-manifest.json`.
 
 ---

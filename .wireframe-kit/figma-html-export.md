@@ -17,7 +17,7 @@ Packaged for reuse on any kit project.
 | **Synced shell** | `make sync` so nav/footer/logo are correct before capture |
 | **Figma file** | One file per client; pages listed in `config/figma.yaml` |
 
-**Do not** run the legacy batch script `figma-capture-pages.mjs` (awaits every capture and often **hangs**). Use **one page per process** (`figma-capture-one.mjs` + MCP poll).
+Captures run **one page per process** (`figma-capture-one.mjs` + MCP poll) — do not await all pages in a single browser session.
 
 ---
 
@@ -205,7 +205,7 @@ Canonical procedures also live in [AI-INSTRUCTIONS.md](./AI-INSTRUCTIONS.md) und
 | Symptom | Fix |
 |---------|-----|
 | Wrong site in capture | Wrong `PORT` / another server on 8765 — set `PORT` and `WIREFRAME_BASE` |
-| Playwright hangs | Use `figma-capture-one.mjs`, not `figma-capture-pages.mjs` |
+| Playwright hangs | Use `make figma-capture-all` (one process per page), not a single long-running batch |
 | Capture never completes | Poll with `generate_figma_design`; re-fire single page if stale |
 | Buttons clipped in Figma | Resize component set; set `clipsContent: false` |
 | Logo overlaps nav on Components page | Logo in Primitives; Site chrome section below |
@@ -228,6 +228,5 @@ Canonical procedures also live in [AI-INSTRUCTIONS.md](./AI-INSTRUCTIONS.md) und
 | [scripts/figma-poll-captures.mjs](./scripts/figma-poll-captures.mjs) | List captureIds |
 | [scripts/figma-check-deps.sh](./scripts/figma-check-deps.sh) | Preflight |
 | [skills/wireframe-to-figma/SKILL.md](./skills/wireframe-to-figma/SKILL.md) | Agent skill |
-| [scripts/figma-capture-pages.mjs](./scripts/figma-capture-pages.mjs) | **Deprecated** — batch await |
 
 Project-specific: `config/figma.yaml`, `config/figma-capture-manifest.json` (generated).
